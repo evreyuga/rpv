@@ -1,27 +1,22 @@
-from multiprocessing import Pool, current_process, Process
-from time import sleep
+def create_function(a, b, c):
+    def new_f(v):
+        return f"{a}{v}{b}{v}{c}"
+
+    return new_f
 
 
-def sleeper(time):
-    print(current_process().name, f"wait for {time} seconds")
-    sleep(time)
-    print(current_process().name, f"has done")
-    return str(f"Wait for {time} seconds")
+x1, x2, x3 = 1, 2, 3
 
+f = create_function(x1, x2, x3)
+x1 = 4
+print(f("*"))
 
-def finish_callback(arg):
-    print("Finish subprocess in", current_process().name, "with", arg)
+def multipliers():
+    def f(v):
+        def f1(x):
+            return x * v
+        return f1
+    return [f(i) for i in range(4)]
 
+print([m(2) for m in multipliers()])
 
-if __name__ == "__main__":
-    print("This process name is", current_process().name)
-    pool = Pool(1)
-    result = pool.apply_async(sleeper, (1,), callback=finish_callback)
-    sleep(0.5)
-    pool.terminate()
-    print(result.ready())
-    pool = Pool(1)
-    result = pool.apply_async(sleeper, (1,), callback=finish_callback)
-    result.wait()
-    pool = Pool(1)
-    pool.terminate()
