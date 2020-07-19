@@ -10,5 +10,6 @@ nose
 pyqtgraph
 matplotlib
 pyvista
+pyvistaqt
 pyqt5-tools
 mayavi

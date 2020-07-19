@@ -84,4 +84,4 @@ class DnaCalc(QObject):
     def start_calc(self, params):
         self.pool.terminate()
         self.pool = Pool(1)
-        self.pool.apply_async(DnaCalc.calculate, (params.copy(),), callback=self.set_calculated, error_callback=print)
+        self.pool.apply_async(DnaCalc.calculate, (params.copy(),), callback=self.set_calculated)
