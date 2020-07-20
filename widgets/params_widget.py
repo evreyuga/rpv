@@ -12,6 +12,10 @@ class ParamsWidget(QtWidgets.QWidget):
         self.ui = Ui_Form()
         self.ui.setupUi(self)
         self.__set_connections()
+        self.param_names = ("beam_angle_az", "beam_angle_el",
+                            "mainline_width_az", "mainline_width_el",
+                            "grid_number_az", "grid_number_el",
+                            "linear", "log")
 
     def params(self):
         return self.ui.beam_angle_az_cb.value(), self.ui.beam_angle_el_cb.value(), \
@@ -19,14 +23,11 @@ class ParamsWidget(QtWidgets.QWidget):
                self.ui.grid_number_az_cb.value(), self.ui.grid_number_el_cb.value(), \
                self.ui.linear_rb.isChecked(), self.ui.log_rb.isChecked()
 
-    def param_names(self):
-        return "beam_angle_az", "beam_angle_el", \
-               "mainline_width_az", "mainline_width_el", \
-               "grid_number_az", "grid_number_el", \
-               "linear", "log"
+    def names(self):
+        return self.param_names
 
     def params_dict(self):
-        return {k: v for k, v in zip(self.param_names(), self.params())}
+        return {k: v for k, v in zip(self.names(), self.params())}
 
     @pyqtSlot()
     def onParamsChanged(self):

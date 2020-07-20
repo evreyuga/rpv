@@ -1,9 +1,7 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
-
 import sys
 from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow, QHBoxLayout
-
 from widgets.params_widget import ParamsWidget
 from widgets.dna2d_widget import Dna2DWidget
 from widgets.dna3d_widget import Dna3DWidget

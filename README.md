@@ -1,7 +1,7 @@
-# Hauling distance calculation
+# Radiation pattern view
 Radiation pattern view
 
-# Intrerpiter
+# Interpreter
 python 3.8.3 or later
 
 ## Install requirements

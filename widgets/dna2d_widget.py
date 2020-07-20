@@ -21,14 +21,13 @@ class Dna2DWidget(PlotWidget):
     @pyqtSlot()
     def onDataChaged(self):
         sender = self.sender()
-        self.img.setImage(sender.data)
+        self.img.setImage(np.rot90(sender.data, -1))
         self.img.setRect(self.__ensure_rect(np.shape(sender.data)))
 
-    # TODO: rewrite for accuracy
     def __ensure_rect(self, shape):
         x_offset = 120. / (shape[0]-1) / 2
         y_offset = 120. / (shape[1]-1) / 2
-        return QRectF(-60 - x_offset, -60 - y_offset, 120 + x_offset * 2, 120 + y_offset * 2)
+        return QRectF(-60 - x_offset, 60 + y_offset, 120 + x_offset * 2, -120 - y_offset * 2)
 
 
 

@@ -1,15 +1,6 @@
 PyQt5
 numpy
-scipy
-matplotlib
-ipython
-jupyter
-pandas
-sympy
-nose
 pyqtgraph
-matplotlib
 pyvista
 pyvistaqt
 pyqt5-tools
-mayavi
