@@ -12,14 +12,14 @@ class ParamsWidget(QtWidgets.QWidget):
         self.ui = Ui_Form()
         self.ui.setupUi(self)
         self.__set_connections()
-        self.param_names = ("beam_angle_az", "beam_angle_el",
-                            "mainline_width_az", "mainline_width_el",
+        self.param_names = ("steering_angle_az", "steering_angle_el",
+                            "main_lobe_width_az", "main_lobe_width_el",
                             "grid_number_az", "grid_number_el",
                             "linear", "log")
 
     def params(self):
-        return self.ui.beam_angle_az_cb.value(), self.ui.beam_angle_el_cb.value(), \
-               self.ui.mainline_width_az_cb.value(), self.ui.mainline_width_el_cb.value(), \
+        return self.ui.steering_angle_az_cb.value(), self.ui.steering_angle_el_cb.value(), \
+               self.ui.main_lobe_width_az_cb.value(), self.ui.main_lobe_width_el_cb.value(), \
                self.ui.grid_number_az_cb.value(), self.ui.grid_number_el_cb.value(), \
                self.ui.linear_rb.isChecked(), self.ui.log_rb.isChecked()
 
@@ -30,18 +30,18 @@ class ParamsWidget(QtWidgets.QWidget):
         return {k: v for k, v in zip(self.names(), self.params())}
 
     @pyqtSlot()
-    def onParamsChanged(self):
+    def on_params_changed(self):
         self.paramsChanged.emit(self.params_dict())
 
     def __set_connections(self):
-        self.ui.beam_angle_az_cb.valueChanged.connect(self.onParamsChanged)
-        self.ui.beam_angle_el_cb.valueChanged.connect(self.onParamsChanged)
-        self.ui.mainline_width_az_cb.valueChanged.connect(self.onParamsChanged)
-        self.ui.mainline_width_el_cb.valueChanged.connect(self.onParamsChanged)
-        self.ui.grid_number_az_cb.valueChanged.connect(self.onParamsChanged)
-        self.ui.grid_number_el_cb.valueChanged.connect(self.onParamsChanged)
-        self.ui.linear_rb.toggled.connect(self.onParamsChanged)
-        self.ui.log_rb.toggled.connect(self.onParamsChanged)
+        self.ui.steering_angle_az_cb.valueChanged.connect(self.on_params_changed)
+        self.ui.steering_angle_el_cb.valueChanged.connect(self.on_params_changed)
+        self.ui.main_lobe_width_az_cb.valueChanged.connect(self.on_params_changed)
+        self.ui.main_lobe_width_el_cb.valueChanged.connect(self.on_params_changed)
+        self.ui.grid_number_az_cb.valueChanged.connect(self.on_params_changed)
+        self.ui.grid_number_el_cb.valueChanged.connect(self.on_params_changed)
+        self.ui.linear_rb.toggled.connect(self.on_params_changed)
+        self.ui.log_rb.toggled.connect(self.on_params_changed)
 
 
 

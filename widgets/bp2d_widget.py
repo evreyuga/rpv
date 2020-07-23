@@ -1,25 +1,30 @@
-from pyqtgraph import PlotWidget, ImageItem
+from pyqtgraph import PlotWidget, ImageItem, ColorMap, GradientLegend
+from pyqtgraph.graphicsItems.GradientEditorItem import Gradients
 from PyQt5.QtCore import QRectF, pyqtSlot, QCoreApplication
 import numpy as np
 
 
-class Dna2DWidget(PlotWidget):
+class Bp2DWidget(PlotWidget):
 
     def __init__(self):
-        super(Dna2DWidget, self).__init__()
+        super(Bp2DWidget, self).__init__()
         # M.B. plot add to params
         self.setXRange(-60, 60)
         self.setYRange(-60, 60)
         self.img = ImageItem()
         self.addItem(self.img)
         _translate = QCoreApplication.translate
-        self.setLabels(title=_translate("Dna2DWidget", "2D DNA"),
-                       left=_translate("Dna2DWidget", "Elevation, °"),
-                       bottom=_translate("Dna2DWidget", "Azimuth, °"))
+        self.setLabels(title=_translate("Bp2DWidget", "Beam pattern"),
+                       left=_translate("Bp2DWidget", "Elevation, °"),
+                       bottom=_translate("Bp2DWidget", "Azimuth, °"))
         self.setLogMode()
+        colormap = ColorMap(*zip(*Gradients["bipolar"]["ticks"]))
+        self.img.setLookupTable(colormap.getLookupTable())
+        #gradient_legend = GradientLegend(10, 10)
+        #self.addItem(gradient_legend)
 
     @pyqtSlot()
-    def onDataChaged(self):
+    def on_data_changed(self):
         sender = self.sender()
         self.img.setImage(np.rot90(sender.data, -1))
         self.img.setRect(self.__ensure_rect(np.shape(sender.data)))

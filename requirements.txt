@@ -4,3 +4,4 @@ pyqtgraph
 pyvista
 pyvistaqt
 pyqt5-tools
+matplotlib

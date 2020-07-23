@@ -3,9 +3,9 @@
 import sys
 from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow, QHBoxLayout
 from widgets.params_widget import ParamsWidget
-from widgets.dna2d_widget import Dna2DWidget
-from widgets.dna3d_widget import Dna3DWidget
-from calculators.dna_calc import DnaCalc
+from widgets.bp2d_widget import Bp2DWidget
+from widgets.bp3d_widget import Bp3DWidget
+from calculators.beam_pattern_calc import BeamPatternCalc
 
 
 if __name__ == '__main__':
@@ -17,19 +17,19 @@ if __name__ == '__main__':
     layout = QHBoxLayout()
     params_widget = ParamsWidget()
     central_widget = QWidget()
-    dna2DWidget = Dna2DWidget()
-    dna3DWidget = Dna3DWidget()
+    bp2DWidget = Bp2DWidget()
+    bp3DWidget = Bp3DWidget()
     # Init calculators
-    dnaCalc = DnaCalc(params_widget)
+    bpCalc = BeamPatternCalc(params_widget)
     # Set connections
-    params_widget.paramsChanged.connect(dnaCalc.start_calc)
-    dnaCalc.calculated.connect(dna2DWidget.onDataChaged)
-    dnaCalc.calculated.connect(dna3DWidget.onDataChaged)
-    params_widget.onParamsChanged()
+    params_widget.paramsChanged.connect(bpCalc.start_calc)
+    bpCalc.calculated.connect(bp2DWidget.on_data_changed)
+    bpCalc.calculated.connect(bp3DWidget.on_data_changed)
+    params_widget.on_params_changed()
     # Place widgets
     layout.addWidget(params_widget)
-    layout.addWidget(dna2DWidget, 1)
-    layout.addWidget(dna3DWidget, 1)
+    layout.addWidget(bp2DWidget, 1)
+    layout.addWidget(bp3DWidget, 1)
     central_widget.setLayout(layout)
     main_window.setCentralWidget(central_widget)
     # Show
