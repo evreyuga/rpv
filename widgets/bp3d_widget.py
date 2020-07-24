@@ -26,7 +26,7 @@ class Bp3DWidget(QWidget):
         sender = self.sender()
         grid = Bp3DWidget.__create_grid(sender.data)
         self.plotter.clear()
-        self.plotter.add_mesh(grid, scalars=sender.data, cmap=self.colormap)
+        self.plotter.add_mesh(grid, scalars=np.rot90(sender.data)[::-1], cmap=self.colormap)
 
     @staticmethod
     def __create_grid(data):
